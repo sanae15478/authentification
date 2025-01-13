@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-
 @Component
 public class JwtTokenProvider {
 
@@ -18,6 +17,9 @@ public class JwtTokenProvider {
     private long expirationTime;
 
     public String generateToken(String username) {
+        if (username == null || username.isEmpty()) {
+            throw new IllegalArgumentException("Username cannot be null or empty");
+        }
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
