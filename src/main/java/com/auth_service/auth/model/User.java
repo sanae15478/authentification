@@ -11,19 +11,25 @@ import lombok.Setter;
 import java.util.Collection;
 import java.util.HashSet;
 
-@Entity
-@Table(name = "users")
 @Getter
 @Setter
-@NoArgsConstructor
+
+@Entity
+@Table(name = "users")
 public class User {
+
     @Id
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
-    private String firstName;
-    private String lastName;
+
+    @NotBlank
     private String email;
+
+    @NotBlank
     private String password;
+
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {CascadeType.PERSIST,
                     CascadeType.MERGE, CascadeType.DETACH})
@@ -33,5 +39,5 @@ public class User {
     private Collection<Role> roles = new HashSet<>();
 
 
-
 }
+

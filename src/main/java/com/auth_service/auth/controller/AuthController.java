@@ -49,9 +49,10 @@ public class AuthController {
     private final JwtUtils jwtUtils;
 
     @PostMapping("/register-user")
-    public ResponseEntity<?> registerUser(@RequestBody User user){
+    public ResponseEntity<?> registerUsers(
+            @RequestBody @Validated User user){
         try{
-            userService.registerUser(user);
+          userService.registerUser(user);
             return ResponseEntity.ok("Registration successful!");
 
         }catch (UserAlreadyExistsException e){
